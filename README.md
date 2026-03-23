@@ -1,6 +1,7 @@
-#Image Rating Prediction
+#Predicting Expert Aesthetic Ratings of Conservation Photography from Neural Network Activation Geometry
+AestheticGeometry
 
-Predict human-judged image ratings by extracting deep visual features with pretrained CNN/Transformer backbones and feeding them into classical ML models.
+
 
 **Pipeline overview:**
 ```
@@ -78,3 +79,20 @@ conda remove -n rating-env --all   # delete environment
 | Memory error during extraction | Process images in batches or use CPU |
 | XGBoost slow on CPU | Add `tree_method="hist"` to `XGBRegressor(...)` |
 | Poor R² score | Try feature scaling, PCA to reduce dimensions, or tune hyperparameters with `GridSearchCV` |
+
+
+Summary:
+
+Determining the "beauty" of an image is a subjective and uniquely human task. There is significant value in building a model to study the human subjective thought process. The CCNY psychology department aims to build a model that predicts the mean score from judges for photos from the “Big Picture Competition.”
+
+
+Steps: 
+I. Feature Extraction & "Uniqueness":
+   1.  **VGG16:** Extract activations from the last and middle convolutional layers. We use the middle layers to prevent data loss associated with the heavy downsampling in later max-pooling stages.
+   2.  **Manual Features (Backup):** Color contrast, foreground/background detection, and segmentation counts to determine if "uniqueness" is actually the best indicator of a high score.
+   3.  **DINO (Backup):** Unlike VGG16, which is largely translation-invariant, we hypothesize that object positioning matters for "uniqueness." DINO will be used to capture these spatial nuances.
+
+II. Machine Learning Models for predicting the new features
+   1. **Linear Regression:** To identify which features offer the best linear correlation to the mean judge score.
+   2. **Classification:** Convert the continuous mean score into three categorical buckets: **Low (0)**, **Medium (1)**, and **High (2)**. We will use **Random Forest** to test predictability. We'll use a Random Forest classifier to see if our model is good at broad (but not precise) predictions.
+   3. **Gradient Boosting:** Use **XGBoost** to handle the complex, non-linear relationships between visual activations and ratings by building a sequence of decision trees that iteratively correct prediction errors to estimate the precise continuous mean judge scores.
