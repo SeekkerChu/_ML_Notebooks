@@ -1,5 +1,4 @@
-# 🖼️ Image Rating Prediction
-### VGG16 · ViT · DINO → Random Forest · XGBoost · Regression
+#Image Rating Prediction
 
 Predict human-judged image ratings by extracting deep visual features with pretrained CNN/Transformer backbones and feeding them into classical ML models.
 
@@ -14,7 +13,7 @@ Images → [VGG16 | ViT | DINO] (feature extractor)
 
 ---
 
-## ⚙️ Setup with Conda
+##Setup with Conda
 
 ### Step 1 — Create environment
 
@@ -56,7 +55,7 @@ print('CUDA     :', torch.cuda.is_available())
 
 ---
 
-## 🔧 Feature Extraction
+## Feature Extraction
 
 ### VGG16 (TorchVision)
 
@@ -139,7 +138,7 @@ def extract_dino(image_path: str) -> np.ndarray:
 
 ---
 
-## 🏗️ Build Feature Matrix
+## Build Feature Matrix
 
 ```python
 import os
@@ -166,7 +165,7 @@ print(f"Feature matrix: {df.shape}")  # (n_images, n_features + 1)
 
 ---
 
-## 🤖 Train & Evaluate ML Models
+## Train & Evaluate ML Models
 
 ```python
 import pandas as pd
@@ -217,7 +216,7 @@ results_df = pd.DataFrame(results)
 
 ---
 
-## 📊 Plots
+## Plots
 
 ### Model Comparison Bar Chart
 
@@ -275,7 +274,7 @@ plt.show()
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 project/
@@ -293,7 +292,7 @@ project/
 
 ---
 
-## 🧹 Conda Cheatsheet
+## Conda Cheatsheet
 
 ```bash
 conda activate rating-env          # activate
@@ -305,7 +304,7 @@ conda remove -n rating-env --all   # delete environment
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 | Problem | Fix |
 |---|---|
